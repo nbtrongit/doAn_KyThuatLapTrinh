@@ -1,0 +1,39 @@
+﻿@page
+@model doAn_KTLT.Pages.LoaiHangModel
+
+<form method="POST">
+    <label>Nhập từ khóa</label><br>
+    <input type="text" name="tuKhoa" pattern="^[^\s]+(\s+[^\s]+)*$"><br>
+    <!--Regex không ký tự whitespace ở đầu và cuối-->
+    <button type="submit" name="suKien" value="Tìm Kiếm">Tìm Kiếm</button>
+    <button type="submit" name="suKien" value="Thêm">Thêm</button>
+    <button type="submit" name="suKien" value="Sửa">Sửa</button>
+    <button type="submit" name="suKien" value="Xóa">Xóa</button>
+    <button type="button" onclick="location.href='index'">Index</button>
+</form>
+@Model.ketQua
+@if (Model.suKien == "True")
+{
+    <form method="POST">
+        <br>
+        <label>Sửa loại hàng</label><br>
+        <label>Tên loại hàng cũ</label>
+        <input type="text" name="tuKhoa" value="@Model.tuKhoa" readonly><br>
+        <label>Tên loại mới</label>
+        <input type="text" name="tuKhoaMoi" pattern="^[^\s]+(\s+[^\s]+)*$" required><br>
+        <button type="submit" name="suKien" value="Thay Đổi">Thay Đổi</button>
+    </form>
+    @Model.ketQua
+}
+<br>
+<table>
+    <tr>
+        <td>Loại Hàng</td>
+    </tr>
+    @foreach (string lh in Model.dsLoaiHang)
+    {
+        <tr>
+            <td>@lh</td>
+        </tr>
+    }
+</table>

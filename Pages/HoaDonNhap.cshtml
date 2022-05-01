@@ -1,0 +1,33 @@
+﻿@page
+@model doAn_KTLT.Pages.HoaDonNhapModel
+@using doAn_KTLT.Entities
+
+<form method="post">
+    <label>Tìm kiếm</label>
+    <input type="text" name="tuKhoa" pattern="^[^\s]+(\s+[^\s]+)*$">
+    <button type="submit" value="Tìm kiếm">Tìm Kiếm</button>
+    <button type="button" onclick="location.href='themHoaDonNhap'">Thêm</button>
+    <button type="button" onclick="location.href='suaHoaDonNhap'">Sửa</button>
+    <button type="button" onclick="location.href='xoaHoaDonNhap'">Xóa</button>
+    <button type="button" onclick="location.href='index'">Index</button>
+</form>
+<br>
+<table>
+    <tr>
+        <td>Mã hóa đơn</td>
+        <td>Ngày hóa đơn</td>
+        <td>Mã Hàng</td>
+        <td>Số lượng</td>
+        <td>Đơn giá</td>
+    </tr>
+    @foreach (HoaDonNhap hdn in Model.dsHoaDonNhap)
+    {
+        <tr>
+            <td>@hdn.maHoaDon</td>
+            <td>@hdn.ngayHoaDon.Ngay/@hdn.ngayHoaDon.Thang/@hdn.ngayHoaDon.Nam</td>
+            <td>@hdn.maHang</td>
+            <td>@hdn.soLuong</td>
+            <td>@hdn.donGia</td>
+        </tr>
+    }
+</table>

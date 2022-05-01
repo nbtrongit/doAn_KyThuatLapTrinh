@@ -1,0 +1,25 @@
+﻿@page
+@model doAn_KTLT.Pages.themHoaDonNhapModel
+
+@using doAn_KTLT.Entities
+
+
+<form method="post">
+    <label>Mã hóa đơn</label><br>
+    <input type="text" name="maHD" value="" pattern="^[^\s]+(\s+[^\s]+)*$" required><br>
+    <label>Ngày hóa đơn</label><br>
+    <input type="text" name="ngayHD" value="" pattern="^(?:(?:31(\/)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$" required><br>
+    <label>Mã mặt hàng</label><br>
+    <input type="text" name="maMH" value="" pattern="^[^\s]+(\s+[^\s]+)*$" required><br>
+    <label>Số lượng</label><br>
+    <input type="text" name="soLuong" value="" pattern="^[0-9]*$" required><br>
+    <label>Đơn giá</label><br>
+    <input type="text" name="donGia" value="" pattern="^[0-9]*$" required><br>
+    <button type="submit" name="suKien" value="Thêm">Thêm</button>
+</form>
+@Model.ketQua
+<br>
+<button type="button" onclick="location.href='HoaDonNhap'">Tìm kiếm</button>
+<button type="button" onclick="location.href='suaHoaDonNhap'">Sửa</button>
+<button type="button" onclick="location.href='xoaHoaDonNhap'">Xóa</button>
+<button type="button" onclick="location.href='index'">Index</button>

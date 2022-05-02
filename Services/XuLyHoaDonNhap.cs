@@ -110,5 +110,40 @@ namespace doAn_KTLT.Services
             LuuTruMatHang.Luu(dsMatHang);
             return true;
         }
+        public static bool Sua(string id, HoaDonNhap hoaDonNhapMoi)
+        {
+            List<HoaDonNhap> dsHoaDonNhap = LuuTruHoaDonNhap.Doc();
+            HoaDonNhap hoaDonNhap;
+            DateTime ngayHienTai = DateTime.Now.Date;
+            List<MatHang> dsMatHang = LuuTruMatHang.Doc();
+            for (int i = 0; i < dsHoaDonNhap.Count; i++)
+            {
+                if(dsHoaDonNhap[i].maHang == id)
+                {
+                    hoaDonNhap = dsHoaDonNhap[i];
+                }
+                else
+                {
+                    if(dsHoaDonNhap[i].maHang == hoaDonNhapMoi.maHang)
+                    {
+                        return false;
+                    }
+                    else if(dsHoaDonNhap[i].maHoaDon == hoaDonNhapMoi.maHoaDon)
+                    {
+                        if(hoaDonNhapMoi.ngayHoaDon.Ngay != dsHoaDonNhap[i].ngayHoaDon.Ngay || hoaDonNhapMoi.ngayHoaDon.Thang != dsHoaDonNhap[i].ngayHoaDon.Thang || hoaDonNhapMoi.ngayHoaDon.Nam != dsHoaDonNhap[i].ngayHoaDon.Nam)
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            for (int i = 0; i < dsMatHang.Count; i++)
+            {
+                if(dsMatHang[i].maHang == id)
+                {
+
+                }
+            }
+        }
     }
 }

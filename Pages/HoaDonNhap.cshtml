@@ -7,8 +7,6 @@
     <input type="text" name="tuKhoa" pattern="^[^\s]+(\s+[^\s]+)*$">
     <button type="submit" value="Tìm kiếm">Tìm Kiếm</button>
     <button type="button" onclick="location.href='themHoaDonNhap'">Thêm</button>
-    <button type="button" onclick="location.href='suaHoaDonNhap'">Sửa</button>
-    <button type="button" onclick="location.href='xoaHoaDonNhap'">Xóa</button>
     <button type="button" onclick="location.href='index'">Index</button>
 </form>
 <br>
@@ -19,6 +17,8 @@
         <td>Mã Hàng</td>
         <td>Số lượng</td>
         <td>Đơn giá</td>
+        <td>Thành Tiền</td>
+        <td>c</td>
     </tr>
     @foreach (HoaDonNhap hdn in Model.dsHoaDonNhap)
     {
@@ -28,6 +28,11 @@
             <td>@hdn.maHang</td>
             <td>@hdn.soLuong</td>
             <td>@hdn.donGia</td>
+            <td>@(hdn.donGia * hdn.soLuong)đ</td>
+            <td>
+                <button type="button" onclick="location.href='suaHoaDonNhap?id=@hdn.maHang'">Sửa</button>
+                <button type="button" onclick="location.href='xoaHoaDonNhap?id=@hdn.maHang'">Xóa</button>
+            </td>
         </tr>
     }
 </table>

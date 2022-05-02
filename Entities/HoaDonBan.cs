@@ -11,5 +11,6 @@ namespace doAn_KTLT.Entities
         public Date ngayHoaDon;
         public string maHang;
         public int soLuong;
+        public int donGia;
     }
 }

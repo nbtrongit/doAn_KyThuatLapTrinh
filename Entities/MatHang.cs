@@ -10,8 +10,8 @@ namespace doAn_KTLT.Entities
         public string maHang;
         public string tenHang;
         public Date hanDung;
-        public string congTySX;
-        public Date ngaySX;
+        public string congTySanXuat;
+        public Date ngaySanXuat;
         public int donGia;
         public string loaiHang;
     }

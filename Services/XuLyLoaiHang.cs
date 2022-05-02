@@ -77,19 +77,31 @@ namespace doAn_KTLT.Services
         }
         public static bool xoaLoaiHang(string tuKhoa)
         {
-            List<string> dsLoaiHang = LuuTruLoaiHang.Doc();
             if (tuKhoa == null)
             {
                 return false;
             }
             List<MatHang> dsMatHang = LuuTruMatHang.Doc();
-            foreach (MatHang mh in dsMatHang)
+            List<HoaDonBan> dsHoaDonBan = LuuTruHoaDonBan.Doc();
+            for(int i = 0; i < dsHoaDonBan.Count; i++)
             {
-                if (mh.loaiHang == tuKhoa)
+                for (int j = 0; j < dsMatHang.Count; j++)
                 {
-                    return false;
+                    if((dsHoaDonBan[i].maHang == dsMatHang[j].maHang) && (dsMatHang[j].loaiHang == tuKhoa))
+                    {
+                        return false;
+                    }
                 }
             }
+            for(int i = 0; i < dsMatHang.Count; i++)
+            {
+                if(dsMatHang[i].loaiHang == tuKhoa)
+                {
+                    dsMatHang.Remove(dsMatHang[i]);
+                }
+            }
+            LuuTruMatHang.Luu(dsMatHang);
+            List<string> dsLoaiHang = LuuTruLoaiHang.Doc();
             foreach (string lh in dsLoaiHang)
             {
                 if (lh == tuKhoa)

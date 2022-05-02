@@ -17,5 +17,9 @@ namespace doAn_KTLT.Services
             handung.Nam = int.Parse(chuoi[2]);
             return handung;
         }
+        public static int chuyenDoi(Date duLieuNgay)
+        {
+            return duLieuNgay.Nam * 10000 + duLieuNgay.Thang * 100 + duLieuNgay.Ngay;
+        }
     }
 }

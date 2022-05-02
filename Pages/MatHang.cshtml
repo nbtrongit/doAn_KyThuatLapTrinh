@@ -1,0 +1,40 @@
+﻿@page
+@model doAn_KTLT.Pages.MatHangModel
+@using doAn_KTLT.Entities
+
+<form method="post">
+    <label>Tìm kiếm</label>
+    <input type="text" name="tuKhoa" pattern="^[^\s]+(\s+[^\s]+)*$">
+    <button type="submit" value="Tìm kiếm">Tìm Kiếm</button>
+    <button type="button" onclick="location.href='themMatHang'">Thêm</button>
+    <button type="button" onclick="location.href='index'">Index</button>
+</form>
+<br>
+<table>
+    <tr>
+        <td>Mã Hàng</td>
+        <td>Tên Hàng</td>
+        <td>Hạn dùng</td>
+        <td>Công Ty Sản Xuất</td>
+        <td>Ngày Sản Xuất</td>
+        <td>Đơn Giá</td>
+        <td>Loại Hàng</td>
+        <td></td>
+    </tr>
+    @foreach (MatHang mh in Model.dsMatHang)
+    {
+        <tr>
+            <td>@mh.maHang</td>
+            <td>@mh.tenHang</td>
+            <td>@mh.hanDung.Ngay/@mh.hanDung.Thang/@mh.hanDung.Nam</td>
+            <td>@mh.congTySanXuat</td>
+            <td>@mh.ngaySanXuat.Ngay/@mh.ngaySanXuat.Thang/@mh.ngaySanXuat.Nam</td>
+            <td>@mh.donGia</td>
+            <td>@mh.loaiHang</td>
+            <td>
+                <button type="button" onclick="location.href='suaMatHang?id=@mh.maHang'">Sửa</button>
+                <button type="button" onclick="location.href='xoaMatHang?id=@mh.maHang'">Xóa</button>
+            </td>
+        </tr>
+    }
+</table>

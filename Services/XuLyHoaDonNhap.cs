@@ -28,6 +28,7 @@ namespace doAn_KTLT.Services
         }
         public static bool themHoaDonNhap(HoaDonNhap hoaDonNhap)
         {
+            DateTime ngayHienTai = DateTime.Now.Date;
             List<HoaDonNhap> dsHoaDonNhap = LuuTruHoaDonNhap.Doc();
             foreach (HoaDonNhap hdn in dsHoaDonNhap)
             {
@@ -35,9 +36,33 @@ namespace doAn_KTLT.Services
                 {
                     return false;
                 }
+                if(hdn.maHoaDon == hoaDonNhap.maHoaDon)
+                {
+                    if((hoaDonNhap.ngayHoaDon.Ngay != hdn.ngayHoaDon.Ngay) || (hoaDonNhap.ngayHoaDon.Thang != hdn.ngayHoaDon.Thang) || (hoaDonNhap.ngayHoaDon.Nam != hdn.ngayHoaDon.Nam))
+                    {
+                        return false;
+                    }
+                }
+            }
+            if((ngayHienTai.Year * 10000 + ngayHienTai.Month * 100 + ngayHienTai.Day) < XuLyDate.chuyenDoi(hoaDonNhap.ngayHoaDon))
+            {
+                return false;
             }
             LuuTruHoaDonNhap.luuHoaDonNhap(hoaDonNhap);
             return true;
+        }
+        public static int tongNhapTheoMatHang(string maMH)
+        {
+            int tong = 0;
+            List<HoaDonNhap> dsHoaDonNhap = LuuTruHoaDonNhap.Doc();
+            foreach (HoaDonNhap hdn in dsHoaDonNhap)
+            {
+                if (hdn.maHang == maMH)
+                {
+                    tong += hdn.soLuong;
+                }
+            }
+            return tong;
         }
     }
 }

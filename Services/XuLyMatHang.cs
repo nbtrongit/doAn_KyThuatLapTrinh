@@ -50,5 +50,42 @@ namespace doAn_KTLT.Services
             LuuTruMatHang.luuLoaiHang(matHang);
             return true;
         }
+        public static MatHang? timMatHang(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return null;
+            }
+            List<MatHang> dsMatHang = LuuTruMatHang.Doc();
+            foreach (MatHang mh in dsMatHang)
+            {
+                if (mh.maHang == id)
+                {
+                    return mh;
+                }
+            }
+            return null;
+        }
+        public static bool Xoa(string id)
+        {
+            List<HoaDonBan> dsHoaDonBan = LuuTruHoaDonBan.Doc();
+            List<MatHang> dsMatHang = LuuTruMatHang.Doc();
+            foreach (HoaDonBan hdb in dsHoaDonBan)
+            {
+                if (hdb.maHang == id)
+                {
+                    return false;
+                }
+            }
+            for (int i = 0; i < dsMatHang.Count; i++)
+            {
+                if (dsMatHang[i].maHang == id)
+                {
+                    dsMatHang.Remove(dsMatHang[i]);
+                }
+            }
+            LuuTruMatHang.Luu(dsMatHang);
+            return true;
+        }
     }
 }

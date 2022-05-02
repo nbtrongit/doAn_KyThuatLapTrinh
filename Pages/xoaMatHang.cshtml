@@ -1,0 +1,14 @@
+﻿@page
+@model doAn_KTLT.Pages.xoaMatHangModel
+
+@if (Model.kiemTra)
+{
+    <form method="post">
+        <div>Xóa mã hàng @Model.matHang.maHang?</div>
+        <button type="submit">Xóa</button>
+    </form>
+}
+@Model.ketQua
+<br>
+<button type="button" onclick="location.href='MatHang'">Tìm kiếm</button>
+<button type="button" onclick="location.href='index'">Index</button>

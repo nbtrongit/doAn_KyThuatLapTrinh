@@ -89,5 +89,34 @@ namespace doAn_KTLT.Services
             LuuTruHoaDonBan.luuHoaDonBan(hoaDonBan);
             return true;
         }
+        public static HoaDonBan? timHoaDonBan(string id1, string id2)
+        {
+            if (string.IsNullOrEmpty(id1) || string.IsNullOrEmpty(id2))
+            {
+                return null;
+            }
+            List<HoaDonBan> dsHoaDonBan = LuuTruHoaDonBan.Doc();
+            foreach (HoaDonBan hdb in dsHoaDonBan)
+            {
+                if (hdb.maHoaDon == id1 && hdb.maHang == id2)
+                {
+                    return hdb;
+                }
+            }
+            return null;
+        }
+        public static bool Xoa(string id1, string id2)
+        {
+            List<HoaDonBan> dsHoaDonBan = LuuTruHoaDonBan.Doc();
+            for (int i = 0; i < dsHoaDonBan.Count; i++)
+            {
+                if (dsHoaDonBan[i].maHoaDon == id1 && dsHoaDonBan[i].maHang == id2)
+                {
+                    dsHoaDonBan.Remove(dsHoaDonBan[i]);
+                }
+            }
+            LuuTruHoaDonBan.Luu(dsHoaDonBan);
+            return true;
+        }
     }
 }

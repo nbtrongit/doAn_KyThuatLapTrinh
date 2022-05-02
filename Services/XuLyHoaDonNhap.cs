@@ -64,5 +64,51 @@ namespace doAn_KTLT.Services
             }
             return tong;
         }
+        public static HoaDonNhap? timHoaDonNhap(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return null;
+            }
+            List<HoaDonNhap> dsHoaDonNhap = LuuTruHoaDonNhap.Doc();
+            foreach(HoaDonNhap hdn in dsHoaDonNhap)
+            {
+                if(hdn.maHang == id)
+                {
+                    return hdn;
+                }
+            }
+            return null;
+        }
+        public static bool Xoa(string id)
+        {
+            List<HoaDonNhap> dsHoaDonNhap = LuuTruHoaDonNhap.Doc();
+            List<HoaDonBan> dsHoaDonBan = LuuTruHoaDonBan.Doc();
+            List<MatHang> dsMatHang = LuuTruMatHang.Doc();
+            foreach (HoaDonBan hdb in dsHoaDonBan)
+            {
+                if (hdb.maHang == id)
+                {
+                    return false;
+                }
+            }
+            for(int i = 0; i < dsHoaDonNhap.Count; i++)
+            {
+                if(dsHoaDonNhap[i].maHang == id)
+                {
+                    dsHoaDonNhap.Remove(dsHoaDonNhap[i]);
+                }
+            }
+            LuuTruHoaDonNhap.Luu(dsHoaDonNhap);
+            for(int i = 0; i < dsMatHang.Count; i++)
+            {
+                if (dsMatHang[i].maHang == id)
+                {
+                    dsMatHang.Remove(dsMatHang[i]);
+                }
+            }
+            LuuTruMatHang.Luu(dsMatHang);
+            return true;
+        }
     }
 }

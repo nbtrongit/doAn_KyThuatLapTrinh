@@ -1,0 +1,14 @@
+﻿@page
+@model doAn_KTLT.Pages.xoaHoaDonBanModel
+
+@if (Model.kiemTra)
+{
+    <form method="post">
+        <div>Xóa hóa đơn @Model.hoaDonBan.maHoaDon có mã hàng là @Model.hoaDonBan.maHang?</div>
+        <button type="submit">Xóa</button>
+    </form>
+}
+@Model.ketQua
+<br>
+<button type="button" onclick="location.href='HoaDonBan'">Tìm kiếm</button>
+<button type="button" onclick="location.href='index'">Index</button>

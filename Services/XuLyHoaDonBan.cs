@@ -122,5 +122,37 @@ namespace doAn_KTLT.Services
             LuuTruHoaDonBan.Luu(dsHoaDonBan);
             return true;
         }
+        public static bool Sua(string id1, string id2, HoaDonBan hoaDonBanMoi)
+        {
+            List<HoaDonBan> dsHoaDonBan = LuuTruHoaDonBan.Doc();
+            List<HoaDonNhap> dsHoaDonNhap = LuuTruHoaDonNhap.Doc();
+            List<MatHang> dsMatHang = LuuTruMatHang.Doc();
+            HoaDonBan hoaDonBan = dsHoaDonBan[0];
+            foreach(HoaDonBan hdb in dsHoaDonBan)
+            {
+                if(hdb.maHoaDon == id1 && hdb.maHang == id2)
+                {
+                    hoaDonBan = hdb;
+                }
+            }
+            for(int i = 0; i < dsHoaDonBan.Count; i++)
+            {
+                if(dsHoaDonBan[i].maHoaDon != id1 && dsHoaDonBan[i].maHang != id2)
+                {
+                    if(dsHoaDonBan[i].maHoaDon == hoaDonBanMoi.maHoaDon && dsHoaDonBan[i].maHang == hoaDonBanMoi.maHang)
+                    {
+                        return false;
+                    }
+                }
+            }
+            for (int i = 0; i < dsHoaDonNhap.Count; i++)
+            {
+                if(dsHoaDonNhap[i].maHang != id2 && dsHoaDonNhap[i].maHang == hoaDonBanMoi.maHang)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }

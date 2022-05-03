@@ -104,17 +104,17 @@ namespace doAn_KTLT.Services
             }
             for(int i = 0; i < dsHoaDonNhap.Count; i++)
             {
-                if(dsHoaDonNhap[i].maHang != id && matHangMoi.maHang == dsHoaDonNhap[i].maHang)
-                {
-                    return false;
-                }
-                else if(dsHoaDonNhap[i].maHang == id)
+                if(dsHoaDonNhap[i].maHang == id)
                 {
                     if (XuLyDate.chuyenDoi(matHangMoi.hanDung) <= XuLyDate.chuyenDoi(dsHoaDonNhap[i].ngayHoaDon) || XuLyDate.chuyenDoi(matHangMoi.ngaySanXuat) >= XuLyDate.chuyenDoi(dsHoaDonNhap[i].ngayHoaDon))
                     {
                         return false;
                     }
                 }
+            }
+            for (int i = 0; i < dsMatHang.Count; i++)
+            {
+                
             }
             if (XuLyDate.chuyenDoi(matHangMoi.hanDung) <= XuLyDate.chuyenDoi(matHangMoi.ngaySanXuat))
             {
@@ -137,7 +137,7 @@ namespace doAn_KTLT.Services
             }
             for (int i = 0; i < dsLoaiHang.Count; i++)
             {
-                if(dsLoaiHang[i] != id && dsLoaiHang[i] == matHangMoi.loaiHang)
+                if(dsLoaiHang[i] != matHang.loaiHang && dsLoaiHang[i] == matHangMoi.loaiHang)
                 {
                     return false;
                 }

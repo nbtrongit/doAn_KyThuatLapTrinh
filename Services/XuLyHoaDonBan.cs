@@ -86,6 +86,10 @@ namespace doAn_KTLT.Services
                     return false;
                 }
             }
+            if(hoaDonBan.soLuong == 0 || hoaDonBan.donGia == 0)
+            {
+                return false;
+            }
             LuuTruHoaDonBan.luuHoaDonBan(hoaDonBan);
             return true;
         }

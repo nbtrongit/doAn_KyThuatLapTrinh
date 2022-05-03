@@ -48,6 +48,10 @@ namespace doAn_KTLT.Services
             {
                 return false;
             }
+            if(hoaDonNhap.soLuong == 0 || hoaDonNhap.donGia == 0)
+            {
+                return false;
+            }
             LuuTruHoaDonNhap.luuHoaDonNhap(hoaDonNhap);
             return true;
         }
@@ -113,24 +117,20 @@ namespace doAn_KTLT.Services
         public static bool Sua(string id, HoaDonNhap hoaDonNhapMoi)
         {
             List<HoaDonNhap> dsHoaDonNhap = LuuTruHoaDonNhap.Doc();
-            HoaDonNhap hoaDonNhap;
-            DateTime ngayHienTai = DateTime.Now.Date;
             List<MatHang> dsMatHang = LuuTruMatHang.Doc();
+            List<HoaDonBan> dsHoaDonBan = LuuTruHoaDonBan.Doc();
+            DateTime ngayHienTai = DateTime.Now.Date;
             for (int i = 0; i < dsHoaDonNhap.Count; i++)
             {
-                if(dsHoaDonNhap[i].maHang == id)
+                if(dsHoaDonNhap[i].maHang != id)
                 {
-                    hoaDonNhap = dsHoaDonNhap[i];
-                }
-                else
-                {
-                    if(dsHoaDonNhap[i].maHang == hoaDonNhapMoi.maHang)
+                    if (dsHoaDonNhap[i].maHang == hoaDonNhapMoi.maHang)
                     {
                         return false;
                     }
-                    else if(dsHoaDonNhap[i].maHoaDon == hoaDonNhapMoi.maHoaDon)
+                    else if (dsHoaDonNhap[i].maHoaDon == hoaDonNhapMoi.maHoaDon)
                     {
-                        if(hoaDonNhapMoi.ngayHoaDon.Ngay != dsHoaDonNhap[i].ngayHoaDon.Ngay || hoaDonNhapMoi.ngayHoaDon.Thang != dsHoaDonNhap[i].ngayHoaDon.Thang || hoaDonNhapMoi.ngayHoaDon.Nam != dsHoaDonNhap[i].ngayHoaDon.Nam)
+                        if (hoaDonNhapMoi.ngayHoaDon.Ngay != dsHoaDonNhap[i].ngayHoaDon.Ngay || hoaDonNhapMoi.ngayHoaDon.Thang != dsHoaDonNhap[i].ngayHoaDon.Thang || hoaDonNhapMoi.ngayHoaDon.Nam != dsHoaDonNhap[i].ngayHoaDon.Nam)
                         {
                             return false;
                         }
@@ -141,9 +141,68 @@ namespace doAn_KTLT.Services
             {
                 if(dsMatHang[i].maHang == id)
                 {
-
+                    if(XuLyDate.chuyenDoi(hoaDonNhapMoi.ngayHoaDon) >= XuLyDate.chuyenDoi(dsMatHang[i].hanDung) || XuLyDate.chuyenDoi(hoaDonNhapMoi.ngayHoaDon) <= XuLyDate.chuyenDoi(dsMatHang[i].ngaySanXuat))
+                    {
+                        return false;
+                    }
                 }
             }
+            if(XuLyDate.chuyenDoi(hoaDonNhapMoi.ngayHoaDon) > (ngayHienTai.Year * 10000 + ngayHienTai.Month * 100 + ngayHienTai.Day))
+            {
+                return false;
+            }
+            for (int i = 0; i < dsHoaDonBan.Count; i++)
+            {
+                if(dsHoaDonBan[i].maHang == id)
+                {
+                    if(XuLyDate.chuyenDoi(hoaDonNhapMoi.ngayHoaDon) > XuLyDate.chuyenDoi(dsHoaDonBan[i].ngayHoaDon))
+                    {
+                        return false;
+                    }
+                    else if(hoaDonNhapMoi.donGia >= dsHoaDonBan[i].donGia)
+                    {
+                        return false;
+                    }
+                }
+            }
+            if (hoaDonNhapMoi.donGia == 0 || hoaDonNhapMoi.soLuong < XuLyHoaDonBan.tongBanTheoMatHang(id))
+            {
+                return false;
+            }
+
+            for (int i = 0; i < dsHoaDonNhap.Count; i++)
+            {
+                if (dsHoaDonNhap[i].maHang == id)
+                {
+                    dsHoaDonNhap[i] = hoaDonNhapMoi;
+                    break;
+                }
+            }
+            LuuTruHoaDonNhap.Luu(dsHoaDonNhap);
+            for (int i = 0; i < dsMatHang.Count; i++)
+            {
+                if (dsMatHang[i].maHang == id)
+                {
+                    MatHang mh = dsMatHang[i];
+                    mh.maHang = hoaDonNhapMoi.maHang;
+                    mh.donGia = hoaDonNhapMoi.donGia;
+                    dsMatHang[i] = mh;
+                    break;
+                }
+            }
+            LuuTruMatHang.Luu(dsMatHang);
+            for (int i = 0; i < dsHoaDonBan.Count; i++)
+            {
+                if (dsHoaDonBan[i].maHang == id)
+                {
+                    HoaDonBan hdb = dsHoaDonBan[i];
+                    hdb.maHang = hoaDonNhapMoi.maHang;
+                    dsHoaDonBan[i] = hdb;
+                    break;
+                }
+            }
+            LuuTruHoaDonBan.Luu(dsHoaDonBan);
+            return true;
         }
     }
 }

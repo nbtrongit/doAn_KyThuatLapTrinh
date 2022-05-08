@@ -1,1 +1,74 @@
-[{"maHang":"123","tenHang":"Gạo","hanDung":{"Ngay":1,"Thang":1,"Nam":2023},"congTySanXuat":"ST25","ngaySanXuat":{"Ngay":1,"Thang":1,"Nam":2022},"donGia":24000,"loaiHang":"Nguyên Liệu"}]
+[
+  {
+    "maHang": "1",
+    "tenHang": "C2",
+    "hanDung": {
+      "Ngay": 28,
+      "Thang": 2,
+      "Nam": 2023
+    },
+    "congTySanXuat": "ABC",
+    "ngaySanXuat": {
+      "Ngay": 1,
+      "Thang": 1,
+      "Nam": 2021
+    },
+    "donGia": 1000,
+    "loaiHang": "Đồ Uống",
+    "ton": 0
+  },
+  {
+    "maHang": "2",
+    "tenHang": "Coca",
+    "hanDung": {
+      "Ngay": 31,
+      "Thang": 12,
+      "Nam": 2021
+    },
+    "congTySanXuat": "ST25",
+    "ngaySanXuat": {
+      "Ngay": 1,
+      "Thang": 7,
+      "Nam": 2021
+    },
+    "donGia": 1500,
+    "loaiHang": "Đồ Uống",
+    "ton": 0
+  },
+  {
+    "maHang": "5",
+    "tenHang": "Gạo",
+    "hanDung": {
+      "Ngay": 28,
+      "Thang": 2,
+      "Nam": 2020
+    },
+    "congTySanXuat": "ST25",
+    "ngaySanXuat": {
+      "Ngay": 1,
+      "Thang": 1,
+      "Nam": 2019
+    },
+    "donGia": 1700,
+    "loaiHang": "Thực Phẩm",
+    "ton": 0
+  },
+  {
+    "maHang": "3",
+    "tenHang": "Coca",
+    "hanDung": {
+      "Ngay": 29,
+      "Thang": 3,
+      "Nam": 2023
+    },
+    "congTySanXuat": "ST25",
+    "ngaySanXuat": {
+      "Ngay": 1,
+      "Thang": 1,
+      "Nam": 2021
+    },
+    "donGia": 500,
+    "loaiHang": "Đồ Uống",
+    "ton": 0
+  }
+]

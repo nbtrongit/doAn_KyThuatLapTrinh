@@ -9,7 +9,7 @@
     <button type="submit" name="suKien" value="Thêm">Thêm</button>
     <button type="submit" name="suKien" value="Sửa">Sửa</button>
     <button type="submit" name="suKien" value="Xóa">Xóa</button>
-    <button type="button" onclick="location.href='index'">Index</button>
+    <a href="index"><button type="button">Index</button></a>
 </form>
 @Model.ketQua
 @if (Model.suKien == "True")
@@ -21,7 +21,7 @@
         <input type="text" name="tuKhoa" value="@Model.tuKhoa" readonly><br>
         <label>Tên loại mới</label>
         <input type="text" name="tuKhoaMoi" pattern="^[^\s]+(\s+[^\s]+)*$" required><br>
-        <button type="submit" name="suKien" value="Thay Đổi">Thay Đổi</button>
+        <button type="submit" name="suKien" value="Thay Đổi">Sửa</button>
     </form>
     @Model.ketQua
 }

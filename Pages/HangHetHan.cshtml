@@ -1,14 +1,11 @@
 ﻿@page
-@model doAn_KTLT.Pages.MatHangModel
+@model doAn_KTLT.Pages.HangHetHanModel
 @using doAn_KTLT.Entities
 
-<form method="post">
-    <label>Tìm kiếm</label>
-    <input type="text" name="tuKhoa" pattern="^[^\s]+(\s+[^\s]+)*$">
-    <button type="submit" value="Tìm kiếm">Tìm Kiếm</button>
-    <a href='themMatHang'><button type="button">Thêm</button></a>
-    <a href="index"><button type="button">Index</button></a>
-</form>
+<h4>Hàng Hết Hạn</h4>
+<br>
+<a href="index"><button type="button">Index</button></a>
+<br>
 <br>
 <table>
     <tr>
@@ -19,7 +16,6 @@
         <td>Ngày Sản Xuất</td>
         <td>Đơn Giá</td>
         <td>Loại Hàng</td>
-        <td></td>
     </tr>
     @foreach (MatHang mh in Model.dsMatHang)
     {
@@ -31,10 +27,6 @@
             <td>@mh.ngaySanXuat.Ngay/@mh.ngaySanXuat.Thang/@mh.ngaySanXuat.Nam</td>
             <td>@mh.donGia</td>
             <td>@mh.loaiHang</td>
-            <td>
-                <button type="button" onclick="location.href='suaMatHang?id=@mh.maHang'">Sửa</button>
-                <button type="button" onclick="location.href='xoaMatHang?id=@mh.maHang'">Xóa</button>
-            </td>
         </tr>
     }
 </table>

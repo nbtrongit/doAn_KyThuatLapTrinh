@@ -34,7 +34,15 @@ namespace doAn_KTLT.Pages
             hoaDonNhap.maHang = maMH;
             hoaDonNhap.soLuong = soLuong;
             hoaDonNhap.donGia = donGia;
-            ketQua = $"Thêm: {XuLyHoaDonNhap.themHoaDonNhap(hoaDonNhap)}";
+            bool kq = XuLyHoaDonNhap.themHoaDonNhap(hoaDonNhap);
+            if(kq)
+            {
+                Response.Redirect("/HoaDonNhap");
+            }
+            else
+            {
+                ketQua = $"Thêm: {kq}";
+            }
         }
     }
 }

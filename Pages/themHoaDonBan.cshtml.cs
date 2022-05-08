@@ -51,7 +51,15 @@ namespace doAn_KTLT.Pages
             hoaDonBan.maHang = maMH;
             hoaDonBan.soLuong = soLuong;
             hoaDonBan.donGia = donGia;
-            ketQua = $"Thêm: {XuLyHoaDonBan.themHoaDonBan(hoaDonBan)}";
+            bool kq = XuLyHoaDonBan.themHoaDonBan(hoaDonBan);
+            if (kq)
+            {
+                Response.Redirect("/HoaDonBan");
+            }
+            else
+            {
+                ketQua = $"Thêm: {kq}";
+            }
         }
     }
 }

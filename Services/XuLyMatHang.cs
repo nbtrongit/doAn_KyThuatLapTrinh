@@ -102,92 +102,227 @@ namespace doAn_KTLT.Services
                     break;
                 }
             }
-            for(int i = 0; i < dsHoaDonNhap.Count; i++)
+            HoaDonNhap hoaDonNhap = dsHoaDonNhap[0];
+            bool a = false;
+            foreach (HoaDonNhap hdn in dsHoaDonNhap)
             {
-                if(dsHoaDonNhap[i].maHang == id)
+                if (hdn.maHang != id)
                 {
-                    if (XuLyDate.chuyenDoi(matHangMoi.hanDung) <= XuLyDate.chuyenDoi(dsHoaDonNhap[i].ngayHoaDon) || XuLyDate.chuyenDoi(matHangMoi.ngaySanXuat) >= XuLyDate.chuyenDoi(dsHoaDonNhap[i].ngayHoaDon))
+                    if(hdn.maHang == matHangMoi.maHang)
+                    {
+                        hoaDonNhap = hdn;
+                        a = true;
+                        break;
+                    }
+                }
+            }
+            if (a)
+            {
+                for(int i = 0; i < dsMatHang.Count; i++)
+                {
+                    if(dsMatHang[i].maHang != id && dsMatHang[i].maHang == matHangMoi.maHang)
                     {
                         return false;
                     }
                 }
-            }
-            for (int i = 0; i < dsMatHang.Count; i++)
-            {
-                
-            }
-            if (XuLyDate.chuyenDoi(matHangMoi.hanDung) <= XuLyDate.chuyenDoi(matHangMoi.ngaySanXuat))
-            {
-                return false;
-            }
-            for (int i = 0; i < dsHoaDonBan.Count; i++)
-            {
-                if(dsHoaDonBan[i].maHang == id && XuLyDate.chuyenDoi(matHangMoi.hanDung) <= XuLyDate.chuyenDoi(dsHoaDonBan[i].ngayHoaDon))
+                for (int i = 0; i < dsHoaDonNhap.Count; i++)
+                {
+                    if (dsHoaDonNhap[i].maHang == matHangMoi.maHang)
+                    {
+                        if (XuLyDate.chuyenDoi(matHangMoi.hanDung) <= XuLyDate.chuyenDoi(dsHoaDonNhap[i].ngayHoaDon) || XuLyDate.chuyenDoi(matHangMoi.ngaySanXuat) >= XuLyDate.chuyenDoi(dsHoaDonNhap[i].ngayHoaDon))
+                        {
+                            return false;
+                        }
+                        else if (dsHoaDonNhap[i].soLuong < XuLyHoaDonBan.tongBanTheoMatHang(id))
+                        {
+                            return false;
+                        }
+                    }
+                }
+                if (XuLyDate.chuyenDoi(matHangMoi.hanDung) <= XuLyDate.chuyenDoi(matHangMoi.ngaySanXuat))
                 {
                     return false;
                 }
-                else if (dsHoaDonBan[i].maHang == id && matHangMoi.donGia >= dsHoaDonBan[i].donGia)
+                for (int i = 0; i < dsHoaDonBan.Count; i++)
+                {
+                    if (dsHoaDonBan[i].maHang == id && XuLyDate.chuyenDoi(matHangMoi.hanDung) <= XuLyDate.chuyenDoi(dsHoaDonBan[i].ngayHoaDon))
+                    {
+                        return false;
+                    }
+                    else if (dsHoaDonBan[i].maHang == id && matHangMoi.donGia >= dsHoaDonBan[i].donGia)
+                    {
+                        return false;
+                    }
+                }
+                if (matHangMoi.donGia == 0)
                 {
                     return false;
                 }
-            } 
-            if(matHangMoi.donGia == 0)
-            {
-                return false;
+                for (int i = 0; i < dsLoaiHang.Count; i++)
+                {
+                    if (dsLoaiHang[i] != matHang.loaiHang && dsLoaiHang[i] == matHangMoi.loaiHang)
+                    {
+                        return false;
+                    }
+                }
+                for (int i = 0; i < dsMatHang.Count; i++)
+                {
+                    if (dsMatHang[i].maHang == id)
+                    {
+                        dsMatHang[i] = matHangMoi;
+                    }
+                    if (dsMatHang[i].loaiHang == matHang.loaiHang)
+                    {
+                        MatHang mh = dsMatHang[i];
+                        mh.loaiHang = matHangMoi.loaiHang;
+                        dsMatHang[i] = mh;
+                    }
+                }
+                LuuTruMatHang.Luu(dsMatHang);
+                for (int i = 0; i < dsLoaiHang.Count; i++)
+                {
+                    if (dsLoaiHang[i] == matHang.loaiHang)
+                    {
+                        dsLoaiHang[i] = matHangMoi.loaiHang;
+                        break;
+                    }
+                }
+                LuuTruLoaiHang.Luu(dsLoaiHang);
+                for (int i = 0; i < dsHoaDonNhap.Count; i++)
+                {
+                    if (dsHoaDonNhap[i].maHang == id)
+                    {
+                        HoaDonNhap hdn = dsHoaDonNhap[i];
+                        hdn.donGia = matHangMoi.donGia;
+                        dsHoaDonNhap[i] = hdn;
+                        break;
+                    }
+                }
+                LuuTruHoaDonNhap.Luu(dsHoaDonNhap);
+                for (int i = 0; i < dsHoaDonBan.Count; i++)
+                {
+                    if (dsHoaDonBan[i].maHang == id)
+                    {
+                        HoaDonBan hdb = dsHoaDonBan[i];
+                        hdb.maHang = matHangMoi.maHang;
+                        dsHoaDonBan[i] = hdb;
+                    }
+                }
+                LuuTruHoaDonBan.Luu(dsHoaDonBan);
             }
-            for (int i = 0; i < dsLoaiHang.Count; i++)
+            else
             {
-                if(dsLoaiHang[i] != matHang.loaiHang && dsLoaiHang[i] == matHangMoi.loaiHang)
+                for (int i = 0; i < dsHoaDonNhap.Count; i++)
+                {
+                    if (dsHoaDonNhap[i].maHang != id && matHangMoi.maHang == dsHoaDonNhap[i].maHang)
+                    {
+                        return false;
+                    }
+                    else if (dsHoaDonNhap[i].maHang == id)
+                    {
+                        if (XuLyDate.chuyenDoi(matHangMoi.hanDung) <= XuLyDate.chuyenDoi(dsHoaDonNhap[i].ngayHoaDon) || XuLyDate.chuyenDoi(matHangMoi.ngaySanXuat) >= XuLyDate.chuyenDoi(dsHoaDonNhap[i].ngayHoaDon))
+                        {
+                            return false;
+                        }
+                    }
+                }
+                if (XuLyDate.chuyenDoi(matHangMoi.hanDung) <= XuLyDate.chuyenDoi(matHangMoi.ngaySanXuat))
                 {
                     return false;
                 }
-            }
-            for (int i = 0; i < dsMatHang.Count; i++)
-            {
-                if(dsMatHang[i].maHang == id)
+                for (int i = 0; i < dsHoaDonBan.Count; i++)
                 {
-                    dsMatHang[i] = matHangMoi;
+                    if (dsHoaDonBan[i].maHang == id && XuLyDate.chuyenDoi(matHangMoi.hanDung) <= XuLyDate.chuyenDoi(dsHoaDonBan[i].ngayHoaDon))
+                    {
+                        return false;
+                    }
+                    else if (dsHoaDonBan[i].maHang == id && matHangMoi.donGia >= dsHoaDonBan[i].donGia)
+                    {
+                        return false;
+                    }
                 }
-                if(dsMatHang[i].loaiHang == matHang.loaiHang)
+                if (matHangMoi.donGia == 0)
                 {
-                    MatHang mh = dsMatHang[i];
-                    mh.loaiHang = matHangMoi.loaiHang;
-                    dsMatHang[i] = mh;
+                    return false;
                 }
-            }
-            LuuTruMatHang.Luu(dsMatHang);
-            for (int i = 0; i < dsLoaiHang.Count; i++)
-            {
-                if (dsLoaiHang[i] == matHang.loaiHang)
+                for (int i = 0; i < dsLoaiHang.Count; i++)
                 {
-                    dsLoaiHang[i] = matHangMoi.loaiHang;
-                    break;
+                    if (dsLoaiHang[i] != matHang.loaiHang && dsLoaiHang[i] == matHangMoi.loaiHang)
+                    {
+                        return false;
+                    }
                 }
-            }
-            LuuTruLoaiHang.Luu(dsLoaiHang);
-            for (int i = 0; i < dsHoaDonNhap.Count; i++)
-            {
-                if(dsHoaDonNhap[i].maHang == id)
+                for (int i = 0; i < dsMatHang.Count; i++)
                 {
-                    HoaDonNhap hdn = dsHoaDonNhap[i];
-                    hdn.maHang = matHangMoi.maHang;
-                    hdn.donGia = matHangMoi.donGia;
-                    dsHoaDonNhap[i] = hdn;
-                    break;
+                    if (dsMatHang[i].maHang == id)
+                    {
+                        dsMatHang[i] = matHangMoi;
+                    }
+                    if (dsMatHang[i].loaiHang == matHang.loaiHang)
+                    {
+                        MatHang mh = dsMatHang[i];
+                        mh.loaiHang = matHangMoi.loaiHang;
+                        dsMatHang[i] = mh;
+                    }
                 }
-            }
-            LuuTruHoaDonNhap.Luu(dsHoaDonNhap);
-            for (int i = 0; i < dsHoaDonBan.Count; i++)
-            {
-                if(dsHoaDonBan[i].maHang == id)
+                LuuTruMatHang.Luu(dsMatHang);
+                for (int i = 0; i < dsLoaiHang.Count; i++)
                 {
-                    HoaDonBan hdb = dsHoaDonBan[i];
-                    hdb.maHang = matHangMoi.maHang;
-                    dsHoaDonBan[i] = hdb;
+                    if (dsLoaiHang[i] == matHang.loaiHang)
+                    {
+                        dsLoaiHang[i] = matHangMoi.loaiHang;
+                        break;
+                    }
                 }
+                LuuTruLoaiHang.Luu(dsLoaiHang);
+                for (int i = 0; i < dsHoaDonNhap.Count; i++)
+                {
+                    if (dsHoaDonNhap[i].maHang == id)
+                    {
+                        HoaDonNhap hdn = dsHoaDonNhap[i];
+                        hdn.maHang = matHangMoi.maHang;
+                        hdn.donGia = matHangMoi.donGia;
+                        dsHoaDonNhap[i] = hdn;
+                        break;
+                    }
+                }
+                LuuTruHoaDonNhap.Luu(dsHoaDonNhap);
+                for (int i = 0; i < dsHoaDonBan.Count; i++)
+                {
+                    if (dsHoaDonBan[i].maHang == id)
+                    {
+                        HoaDonBan hdb = dsHoaDonBan[i];
+                        hdb.maHang = matHangMoi.maHang;
+                        dsHoaDonBan[i] = hdb;
+                    }
+                }
+                LuuTruHoaDonBan.Luu(dsHoaDonBan);
             }
-            LuuTruHoaDonBan.Luu(dsHoaDonBan);
             return true;
+        }
+        public static List<MatHang> hangHetHan()
+        {
+            List<MatHang> dsMatHang = LuuTruMatHang.Doc();
+            DateTime ngayHienTai = DateTime.Now.Date;
+            for (int i = 0; i < dsMatHang.Count; i++)
+            {
+                if(XuLyDate.chuyenDoi(dsMatHang[i].hanDung) >= (ngayHienTai.Year * 10000 + ngayHienTai.Month * 100 + ngayHienTai.Day))
+                {
+                    dsMatHang.Remove(dsMatHang[i]);
+                }
+            }
+            return dsMatHang;
+        }
+        public static List<MatHang> hangTon()
+        {
+            List<MatHang> dsMatHang = LuuTruMatHang.Doc();
+            for (int i = 0; i < dsMatHang.Count; i++)
+            {
+                MatHang mh = dsMatHang[i];
+                mh.ton = XuLyHoaDonNhap.tongNhapTheoMatHang(dsMatHang[i].maHang) - XuLyHoaDonBan.tongBanTheoMatHang(dsMatHang[i].maHang);
+                dsMatHang[i] = mh;
+            }
+            return dsMatHang;
         }
     }
 }

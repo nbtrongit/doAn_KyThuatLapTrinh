@@ -73,7 +73,16 @@ namespace doAn_KTLT.Pages
                 }
             }
             matHang.loaiHang = loaiHang;
-            ketQua = $"Thêm: {XuLyMatHang.themMatHang(matHang)}";
+            matHang.ton = 0;
+            bool kq = XuLyMatHang.themMatHang(matHang);
+            if (kq)
+            {
+                Response.Redirect("/MatHang");
+            }
+            else
+            {
+                ketQua = $"Thêm: {kq}";
+            }
         }
     }
 }

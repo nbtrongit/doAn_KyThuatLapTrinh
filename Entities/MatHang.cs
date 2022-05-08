@@ -14,5 +14,6 @@ namespace doAn_KTLT.Entities
         public Date ngaySanXuat;
         public int donGia;
         public string loaiHang;
+        public int ton;
     }
 }

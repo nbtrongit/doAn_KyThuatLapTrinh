@@ -37,7 +37,7 @@ namespace doAn_KTLT.Pages
             }
             else
             {
-                ketQua = "Không tìm thấy hóa đơn nhập";
+                ketQua = "Không tìm thấy hóa đơn bán";
             }
             kiemTra = (hdb != null);
         }

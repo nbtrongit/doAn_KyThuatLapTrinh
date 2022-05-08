@@ -62,12 +62,11 @@ namespace doAn_KTLT.Services
             }
             LuuTruLoaiHang.Luu(dsLoaiHang);
             List<MatHang> dsMatHang = LuuTruMatHang.Doc();
-            MatHang mh = dsMatHang[0];
             for (int i = 0; i < dsMatHang.Count; i++)
             {
                 if (dsMatHang[i].loaiHang == tuKhoaCu)
                 {
-                    mh = dsMatHang[i];
+                    MatHang mh = dsMatHang[i];
                     mh.loaiHang = tuKhoaMoi;
                     dsMatHang[i] = mh;
                 }

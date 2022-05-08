@@ -16,17 +16,19 @@
         <td>Ngày Sản Xuất</td>
         <td>Đơn Giá</td>
         <td>Loại Hàng</td>
+        <td>Số lượng tồn</td>
     </tr>
     @foreach (MatHang mh in Model.dsMatHang)
     {
-        <tr>
-            <td>@mh.maHang</td>
-            <td>@mh.tenHang</td>
-            <td>@mh.hanDung.Ngay/@mh.hanDung.Thang/@mh.hanDung.Nam</td>
-            <td>@mh.congTySanXuat</td>
-            <td>@mh.ngaySanXuat.Ngay/@mh.ngaySanXuat.Thang/@mh.ngaySanXuat.Nam</td>
-            <td>@mh.donGia</td>
-            <td>@mh.loaiHang</td>
-        </tr>
+<tr>
+    <td>@mh.maHang</td>
+    <td>@mh.tenHang</td>
+    <td>@mh.hanDung.Ngay/@mh.hanDung.Thang/@mh.hanDung.Nam</td>
+    <td>@mh.congTySanXuat</td>
+    <td>@mh.ngaySanXuat.Ngay/@mh.ngaySanXuat.Thang/@mh.ngaySanXuat.Nam</td>
+    <td>@mh.donGia</td>
+    <td>@mh.loaiHang</td>
+    <td>@mh.ton</td>
+</tr>
     }
 </table>

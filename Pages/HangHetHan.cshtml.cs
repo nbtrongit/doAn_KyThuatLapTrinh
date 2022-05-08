@@ -15,7 +15,8 @@ namespace doAn_KTLT.Pages
         public List<MatHang> dsMatHang;
         public void OnGet()
         {
-            dsMatHang = XuLyMatHang.hangHetHan();
+            dsMatHang = XuLyMatHang.hangTon();
+            dsMatHang = XuLyMatHang.hangHetHan(dsMatHang);
         }
     }
 }

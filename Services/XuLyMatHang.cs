@@ -300,9 +300,8 @@ namespace doAn_KTLT.Services
             }
             return true;
         }
-        public static List<MatHang> hangHetHan()
+        public static List<MatHang> hangHetHan(List<MatHang> dsMatHang)
         {
-            List<MatHang> dsMatHang = LuuTruMatHang.Doc();
             DateTime ngayHienTai = DateTime.Now.Date;
             for (int i = 0; i < dsMatHang.Count; i++)
             {

@@ -112,5 +112,25 @@ namespace doAn_KTLT.Services
             }
             return false;
         }
-    }
+        public static List<string> thongKe(List<MatHang> dsMatHang)
+        {
+            List<string> dsLoaiHang = new List<string>();
+            for (int i = 0; i < dsMatHang.Count; i++)
+            {
+                bool a = true;
+                foreach(string lh in dsLoaiHang)
+                {
+                    if(dsMatHang[i].loaiHang == lh)
+                    {
+                        a = false;
+                    }
+                }
+                if (a)
+                {
+                    dsLoaiHang.Add(dsMatHang[i].loaiHang);
+                }
+            }
+            return dsLoaiHang;
+        }
+    } 
 }

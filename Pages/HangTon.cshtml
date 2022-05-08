@@ -9,26 +9,22 @@
 <br>
 <table>
     <tr>
-        <td>Mã Hàng</td>
-        <td>Tên Hàng</td>
-        <td>Hạn dùng</td>
-        <td>Công Ty Sản Xuất</td>
-        <td>Ngày Sản Xuất</td>
-        <td>Đơn Giá</td>
         <td>Loại Hàng</td>
         <td>Số lượng tồn</td>
     </tr>
-    @foreach (MatHang mh in Model.dsMatHang)
+    @foreach(string lh in Model.dsLoaiHang)
     {
+        int tong = 0;
+        for(int i = 0; i < Model.dsMatHang.Count; i++)
+        {
+            if(Model.dsMatHang[i].loaiHang == lh)
+            {
+                tong = tong + Model.dsMatHang[i].ton;
+            }
+        }
         <tr>
-            <td>@mh.maHang</td>
-            <td>@mh.tenHang</td>
-            <td>@mh.hanDung.Ngay/@mh.hanDung.Thang/@mh.hanDung.Nam</td>
-            <td>@mh.congTySanXuat</td>
-            <td>@mh.ngaySanXuat.Ngay/@mh.ngaySanXuat.Thang/@mh.ngaySanXuat.Nam</td>
-            <td>@mh.donGia</td>
-            <td>@mh.loaiHang</td>
-            <td>@mh.ton</td>
+            <td>@lh</td>
+            <td>@tong</td>
         </tr>
     }
 </table>

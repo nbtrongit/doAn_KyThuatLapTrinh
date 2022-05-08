@@ -12,9 +12,11 @@ namespace doAn_KTLT.Pages
     public class HangTonModel : PageModel
     {
         public List<MatHang> dsMatHang;
+        public List<string> dsLoaiHang;
         public void OnGet()
         {
             dsMatHang = XuLyMatHang.hangTon();
+            dsLoaiHang = XuLyLoaiHang.thongKe(dsMatHang);
         }
     }
 }
